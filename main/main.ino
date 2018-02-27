@@ -18,5 +18,11 @@ void setup() {
 }
 
 void loop() {
-  
+    for(i = 0; i < sizeof(SW) / sizeof(int); i++) {
+    if(digitalRead(SW[i]) == HIGH) {
+      digitalWrite(LED[i], HIGH);
+    } else {
+      digitalWrite(LED[i], LOW);
+    }
+  }
 }
