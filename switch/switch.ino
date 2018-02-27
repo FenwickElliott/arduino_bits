@@ -1,33 +1,40 @@
-int status = 0;
+int state = 0;
+
+int SW0 = 2;
+int SW1 = 3;
+int SW2 = 4;
+int LED0 = 11;
+int LED1 = 12;
+int LED2 = 13;
 
 void setup() {
 //  Serial.begin(9600);
-  pinMode(1, INPUT);
-  pinMode(2, INPUT);
-  pinMode(3, INPUT);
-  pinMode(11, OUTPUT);
-  pinMode(12, OUTPUT);
-  pinMode(13, OUTPUT);
+  pinMode(SW0, INPUT);
+  pinMode(SW1, INPUT);
+  pinMode(SW2, INPUT);
+  pinMode(LED0, OUTPUT);
+  pinMode(LED1, OUTPUT);
+  pinMode(LED2, OUTPUT);
 //  Serial.println("0: stopped");
 }
 
 void loop() {
-  if (digitalRead(1) == HIGH && status != 1) {
+  if (digitalRead(SW0) == HIGH && state != 1) {
 //    Serial.println("1: running");
-    digitalWrite(11, HIGH);
-    digitalWrite(12, LOW);
-    digitalWrite(13, LOW);
+    digitalWrite(LED0, HIGH);
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, LOW);
   }
-  if (digitalRead(2) == HIGH && status != 2) {
+  if (digitalRead(SW1) == HIGH && state != 2) {
 //    Serial.println("2: ramping down");
-    digitalWrite(11, LOW);
-    digitalWrite(12, HIGH);
-    digitalWrite(13, LOW);
+    digitalWrite(LED0, LOW);
+    digitalWrite(LED1, HIGH);
+    digitalWrite(LED2, LOW);
   }
-  if (digitalRead(3) == HIGH && status != 3) {
+  if (digitalRead(SW2) == HIGH && state != 3) {
 //    Serial.println("3: stopping");
-    digitalWrite(11, LOW);
-    digitalWrite(12, LOW);
-    digitalWrite(13, HIGH);
+    digitalWrite(LED0, LOW);
+    digitalWrite(LED1, LOW);
+    digitalWrite(LED2, HIGH);
   }
 }
