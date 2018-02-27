@@ -1,3 +1,4 @@
+int i;
 int state = 0;
 
 int SW0 = 2;
@@ -7,14 +8,17 @@ int LED0 = 11;
 int LED1 = 12;
 int LED2 = 13;
 
+int switches[] = {SW0, SW1, SW2};
+int LEDs[] = {LED0, LED1, LED2};
+
 void setup() {
   Serial.begin(9600);
-  pinMode(SW0, INPUT);
-  pinMode(SW1, INPUT);
-  pinMode(SW2, INPUT);
-  pinMode(LED0, OUTPUT);
-  pinMode(LED1, OUTPUT);
-  pinMode(LED2, OUTPUT);
+  for (i = 0; i < 3; i++) {
+    pinMode(switches[i], INPUT);
+  }
+  for (i = 0; i < 3; i++) {
+    pinMode(LEDs[i], OUTPUT);
+  }
   Serial.println("0: stopped");
 }
 
