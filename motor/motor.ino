@@ -8,11 +8,6 @@ void setup() {
   Serial.begin(9600);
   Serial.println("Setting up motor control");
   AFMS.begin();
-
-  M1->setSpeed(255);
-  M1->run(FORWARD);
-//  M1->setSpeed(255);
-  M1->run(RELEASE);
 }
 
 void loop() {
