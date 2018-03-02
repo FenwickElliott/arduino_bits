@@ -1,47 +1,40 @@
 int i;
-int state = 0;
+int state;
+int n = 3;
 
-int SW0 = 2;
-int SW1 = 3;
-int SW2 = 4;
-int LED0 = 11;
-int LED1 = 12;
-int LED2 = 13;
-
-int switches[] = {SW0, SW1, SW2};
-int LEDs[] = {LED0, LED1, LED2};
+int SW[] = {2,3,4};
+int LED[] = {10, 11, 12};
 
 void setup() {
   Serial.begin(9600);
-  for (i = 0; i < 3; i++) {
-    pinMode(switches[i], INPUT);
+  for(i = 0; i < n; i++) {
+    pinMode(SW[i], INPUT);
   }
-  for (i = 0; i < 3; i++) {
-    pinMode(LEDs[i], OUTPUT);
+  for(i = 0; i < n; i++) {
+    pinMode(LED[i], OUTPUT);
   }
-  Serial.println("0: stopped");
+  setState(2);
+  Serial.println("Set up complete!");
 }
 
 void loop() {
-  if (digitalRead(SW0) == HIGH && state != 1) {
-    state = 1;
-    Serial.println("1: running");
-    digitalWrite(LED0, HIGH);
-    digitalWrite(LED1, LOW);
-    digitalWrite(LED2, LOW);
-  }
-  if (digitalRead(SW1) == HIGH && state != 2) {
-    state = 2;
-    Serial.println("2: ramping down");
-    digitalWrite(LED0, LOW);
-    digitalWrite(LED1, HIGH);
-    digitalWrite(LED2, LOW);
-  }
-  if (digitalRead(SW2) == HIGH && state != 3) {
-    state = 3;
-    Serial.println("3: stopping");
-    digitalWrite(LED0, LOW);
-    digitalWrite(LED1, LOW);
-    digitalWrite(LED2, HIGH);
+  for (i = 0; i < n; i++) {
+    if(digitalRead(SW[i]) == HIGH && i != state) {
+      setState(i);
+    }
   }
 }
+
+void setState(int s) {
+  state = s;
+  Serial.print("State: ");
+  Serial.println(state);
+  for(i = 0; i < 3; i++) {
+    if(i == s) {
+      digitalWrite(LED[i], HIGH);
+    } else {
+      digitalWrite(LED[i], LOW);
+    }
+  }
+}
+
